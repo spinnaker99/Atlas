@@ -44,8 +44,8 @@ public class AppsListAdapter extends ArrayAdapter<Apps> {
 				@Override
 				public void onClick(View v) {
 					Intent i = new Intent(mContext, AppVersionsActivity.class);
-					i.putExtra("Identifier", item.getPublicIdentifier());
 					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					i.putExtra("Identifier", item.getPublicIdentifier());
 					mContext.startActivity(i);
 				}
 			});
