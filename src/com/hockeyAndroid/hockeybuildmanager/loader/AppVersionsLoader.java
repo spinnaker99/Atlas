@@ -23,7 +23,7 @@ public class AppVersionsLoader extends AsyncTaskLoader<AppVersions> {
 
 	@Override
 	public AppVersions loadInBackground() {
-		String url = Constants.baseUrl + "/" + identifier +"/app_versions";
+		String url = Constants.BASE_URL + "/" + identifier +"/app_versions";
 		return (AppVersions) ApiManager.doRequest(mContext, HttpMethod.GET, url, AppVersions.class);
 	}
 

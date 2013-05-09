@@ -24,7 +24,7 @@ public class AppsListLoader extends AsyncTaskLoader<AppsList> {
 
 	@Override
 	public AppsList loadInBackground() {
-		String url = Constants.baseUrl;
+		String url = Constants.BASE_URL;
 		return (AppsList) ApiManager.doRequest(mContext, HttpMethod.GET, url, AppsList.class);
 	}
 	

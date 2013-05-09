@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -29,6 +30,7 @@ import com.hockeyAndroid.hockeybuildmanager.responseModel.Tokens.Token;
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
+@SuppressWarnings("unused")
 public class LoginActivity extends Activity {
 	
 	/**
@@ -90,12 +92,7 @@ public class LoginActivity extends Activity {
 				});
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		getMenuInflater().inflate(R.menu.login, menu);
-		return true;
-	}
+
 
 	/**
 	 * Attempts to sign in or register the account specified by the login form.
@@ -204,19 +201,19 @@ public class LoginActivity extends Activity {
 		protected Boolean doInBackground(Void... params) {
 			try {
 				String url = "https://rink.hockeyapp.net/api/2/auth_tokens";
-				Tokens tokens = (Tokens) ApiManager.doLoginRequest(getApplicationContext(), HttpMethod.GET, url, Tokens.class, mEmail, mPassword, Constants.auth_get);
+				Tokens tokens = (Tokens) ApiManager.doLoginRequest(getApplicationContext(), HttpMethod.GET, url, Tokens.class, mEmail, mPassword, Constants.AUTH_GET);
 				if (tokens.getTokens().size()>0) {
 					for (Token token : tokens.getTokens()) {
-						SharedPreferences sharedPrefs = getSharedPreferences(Constants.app_prefs, Context.MODE_MULTI_PROCESS);
-						sharedPrefs.edit().putString(Constants.app_key, token.getToken()).commit();
+						SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+						sharedPrefs.edit().putString(Constants.APP_KEY, token.getToken()).commit();
 						return true;
  					}
 				}
 				
-				tokens = (Tokens) ApiManager.doLoginRequest(getApplicationContext(), HttpMethod.POST, url, Tokens.class, mEmail, mPassword, Constants.auth_post);
+				tokens = (Tokens) ApiManager.doLoginRequest(getApplicationContext(), HttpMethod.POST, url, Tokens.class, mEmail, mPassword, Constants.AUTH_POST);
 				for (Token token : tokens.getTokens()) {
-					SharedPreferences sharedPrefs = getSharedPreferences(Constants.app_prefs, Context.MODE_MULTI_PROCESS);
-					sharedPrefs.edit().putString(Constants.app_key, token.getToken()).commit();
+					SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+					sharedPrefs.edit().putString(Constants.APP_KEY, token.getToken()).commit();
 					return true;
 				}
 				

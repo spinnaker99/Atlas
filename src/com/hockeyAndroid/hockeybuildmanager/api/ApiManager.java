@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import com.google.gson.GsonBuilder;
 import com.hockeyAndroid.hockeybuildmanager.responseModel.BaseResponse;
@@ -24,9 +25,9 @@ public class ApiManager {
 		
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.setAccept(Collections.singletonList(new MediaType("application","json")));
-		SharedPreferences sharedPrefs = context.getSharedPreferences(Constants.app_prefs, Context.MODE_MULTI_PROCESS);
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
 		
-		requestHeaders.add(Constants.header_name, sharedPrefs.getString(Constants.app_key, ""));
+		requestHeaders.add(Constants.HEADER_NAME, sharedPrefs.getString(Constants.APP_KEY, ""));
 		
 		HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
 		RestTemplate restTemplate = new RestTemplate();
@@ -49,10 +50,10 @@ public class ApiManager {
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.setAccept(Collections.singletonList(new MediaType("application","json")));
 		
-		if (type.equals(Constants.auth_get)) {
-			requestHeaders.add(Constants.login_header, username + ":" + password);
-		} else if (type.equals(Constants.auth_post)) {
-			requestHeaders.add(Constants.login_header, username + ":" + password + " -F \"rights=0\"");
+		if (type.equals(Constants.AUTH_GET)) {
+			requestHeaders.add(Constants.LOGIN_HEADER, username + ":" + password);
+		} else if (type.equals(Constants.AUTH_POST)) {
+			requestHeaders.add(Constants.LOGIN_HEADER, username + ":" + password + " -F \"rights=0\"");
 		}
 		
 		HttpAuthentication httpAuth = new HttpBasicAuthentication(username, password);
