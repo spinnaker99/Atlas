@@ -7,30 +7,63 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    android:orientation="vertical" >
+	    
+	    <TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:fontFamily="sans-serif"
+		    android:textAppearance="?android:attr/textAppearanceMedium"
+		    android:layout_marginLeft="16dp"
+		    android:layout_marginRight="16dp"
+		    android:layout_marginTop="16dp"
+		    android:text="@string/version"/>
+	    
+	    <TextView
+		    android:id="@+id/app_version"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="16dp"
+		    android:layout_marginRight="16dp"
+		    android:layout_marginBottom="16dp"/>
     	
         <Button
 		    android:id="@+id/config_button"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
-		    android:layout_marginLeft="48dp"
-		    android:layout_marginRight="48dp"
-		    android:layout_marginTop="48dp"
-		    android:text="Configure" />
+		    android:layout_marginLeft="16dp"
+		    android:layout_marginRight="16dp"
+		    android:layout_marginTop="16dp"
+		    android:text="@string/configure" />
 		
 		<Button
 		    android:id="@+id/download_button"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
-		    android:layout_marginLeft="48dp"
-		    android:layout_marginRight="48dp"
-		    android:layout_marginTop="48dp"
-		    android:text="Download" />
+		    android:layout_marginLeft="16dp"
+		    android:layout_marginRight="16dp"
+		    android:layout_marginTop="16dp"
+		    android:layout_marginBottom="16dp"
+		    android:text="@string/download" />
 		
+		
+		
+	    
+	    <TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:fontFamily="sans-serif"
+		    android:layout_marginLeft="16dp"
+		    android:layout_marginRight="16dp"
+		    android:layout_marginTop="16dp"
+		    android:layout_marginBottom="16dp"
+		    android:text="@string/relese_notes"/>
+	    
 		<WebView
 		    android:id="@+id/notes_webview"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
-		    android:layout_marginTop="48dp" />
+		    android:layout_marginLeft="16dp"
+		    android:layout_marginRight="16dp" />
     
     </LinearLayout>
 </ScrollView>

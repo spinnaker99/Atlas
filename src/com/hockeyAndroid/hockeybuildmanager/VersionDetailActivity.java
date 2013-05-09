@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
+import android.widget.TextView;
 
 import com.hockeyAndroid.hockeybuildmanager.api.Constants;
 
@@ -17,7 +18,6 @@ public class VersionDetailActivity extends BaseFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_version_detail);
-		
 		
 		String title = getIntent().getStringExtra("title");
 		final String configUrl = getIntent().getStringExtra("config_url");
@@ -33,6 +33,8 @@ public class VersionDetailActivity extends BaseFragmentActivity {
 		
 		final WebView wv = (WebView) findViewById(R.id.notes_webview);
 		wv.loadData(notes, "text/html", "UTF-8");
+		
+		((TextView)findViewById(R.id.app_version)).setText(title);
 		
 		findViewById(R.id.config_button).setOnClickListener(new OnClickListener() {
 			@Override
