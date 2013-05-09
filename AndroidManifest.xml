@@ -15,23 +15,27 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
         <activity
             android:name="com.hockeyAndroid.hockeybuildmanager.MainActivity"
             android:label="@string/app_name" >
         </activity>
+        
         <activity
-            android:name="com.hockeyAndroid.hockeybuildmanager.AppVersionsActivity"
-            android:label="App Versions" />
+            android:name="com.hockeyAndroid.hockeybuildmanager.AppVersionsActivity"/>
+        
         <activity
             android:name="com.hockeyAndroid.hockeybuildmanager.VersionDetailActivity"
             android:label="Version Detail" />
+        
         <activity
             android:name="com.hockeyAndroid.hockeybuildmanager.LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
+        
         <activity
-            android:name="com.hockeyAndroid.hockeybuildmanager.FullscreenActivity"
+            android:name="com.hockeyAndroid.hockeybuildmanager.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
             <intent-filter>
@@ -40,6 +44,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
     </application>
 
 </manifest>
