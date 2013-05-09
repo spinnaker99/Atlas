@@ -17,6 +17,7 @@
     <string name="relese_notes">Release Notes:</string>
     
     
+    <string name="login_message">Login using your HockeyApp.net account.</string>
     <string name="confirm_logout">Are you sure you want to logout?</string>
     <string name="alert_dialog_ok">OK</string>
     <string name="alert_dialog_cancel">Cancel</string>
