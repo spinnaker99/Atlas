@@ -12,8 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.PuckYeah.AppVersionsActivity;
-import com.PuckYeah.responseModel.Apps;
-import com.hockeyAndroid.hockeybuildmanager.R;
+import com.PuckYeah.R;
+import com.PuckYeah.model.Apps;
 
 public class AppsListAdapter extends ArrayAdapter<Apps> {
 
@@ -29,7 +29,9 @@ public class AppsListAdapter extends ArrayAdapter<Apps> {
 	public void setData(List<Apps> data) {
 		clear();
 		if (data != null) {
-			addAll(data);
+			for (Apps app : data) {
+				add(app);
+			}
 		}
 	}
 	

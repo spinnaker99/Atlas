@@ -2,12 +2,12 @@ package com.PuckYeah.loader;
 
 import org.springframework.http.HttpMethod;
 
-import android.content.AsyncTaskLoader;
 import android.content.Context;
+import android.support.v4.content.AsyncTaskLoader;
 
 import com.PuckYeah.api.ApiManager;
 import com.PuckYeah.api.Constants;
-import com.PuckYeah.responseModel.AppVersions;
+import com.PuckYeah.response.AppVersions;
 
 public class AppVersionsLoader extends AsyncTaskLoader<AppVersions> {
 

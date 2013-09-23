@@ -15,8 +15,9 @@ import org.springframework.web.client.RestTemplate;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
-import com.PuckYeah.responseModel.BaseResponse;
+import com.PuckYeah.response.BaseResponse;
 import com.google.gson.GsonBuilder;
 
 public class ApiManager {
@@ -69,7 +70,6 @@ public class ApiManager {
 		ResponseEntity<T> responseEntity = null;
 		responseEntity = restTemplate.exchange(url, method, requestEntity, clazz); 
 		T response = responseEntity.getBody();
-		
 		return response;
 	}
 }

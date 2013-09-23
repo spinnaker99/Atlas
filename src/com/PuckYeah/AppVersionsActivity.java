@@ -1,24 +1,30 @@
+/*
+   Copyright 2013 Vijay Penemetsa
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 package com.PuckYeah;
 
-import android.app.ActionBar;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.Context;
-import android.content.Intent;
-import android.content.Loader;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.widget.ListView;
 
 import com.PuckYeah.adapter.AppVersionsAdapter;
-import com.PuckYeah.api.Constants;
 import com.PuckYeah.loader.AppVersionsLoader;
-import com.PuckYeah.responseModel.AppVersions;
-import com.hockeyAndroid.hockeybuildmanager.R;
+import com.PuckYeah.response.AppVersions;
 
-@SuppressWarnings("unused")
 public class AppVersionsActivity extends BaseFragmentActivity implements LoaderCallbacks<AppVersions> {
 
 	ListView list;
@@ -31,18 +37,13 @@ public class AppVersionsActivity extends BaseFragmentActivity implements LoaderC
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_app_versions);
 		
-		ActionBar ab = getActionBar();
-		ab.setHomeButtonEnabled(true);
-		ab.setDisplayHomeAsUpEnabled(true);
-		ab.setTitle(R.string.app_versions_title);
-		
 		adapter = new AppVersionsAdapter(getApplicationContext(), 0, getLayoutInflater());
 		list = (ListView) findViewById(R.id.app_version_list);
 		list.setAdapter(adapter);
 		
 		identifier = getIntent().getStringExtra("Identifier");
 		
-		getLoaderManager().initLoader(1, new Bundle(), this);
+		getSupportLoaderManager().initLoader(1, new Bundle(), this);
 	}
 
 	
@@ -62,6 +63,6 @@ public class AppVersionsActivity extends BaseFragmentActivity implements LoaderC
 	}
 	
 	public void restartLoaders() {
-		getLoaderManager().restartLoader(1, new Bundle(), this);
+		getSupportLoaderManager().restartLoader(1, new Bundle(), this);
 	}
 }

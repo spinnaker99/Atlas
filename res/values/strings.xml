@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Atlas</string>
-    <string name="app_list_title">My Apps</string>
+    <string name="app_name">Puck-Yeah</string>
+    <string name="app_list_title">Puck-Yeah  &#8212;  My Apps</string>
     <string name="app_versions_title">App Versions</string>
     <string name="app_version_detail_title">App Details</string>
     

@@ -1,3 +1,19 @@
+/*
+   Copyright 2013 Vijay Penemetsa
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 package com.PuckYeah;
 
 import org.springframework.http.HttpMethod;
@@ -6,7 +22,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -26,26 +41,17 @@ import android.widget.TextView;
 
 import com.PuckYeah.api.ApiManager;
 import com.PuckYeah.api.Constants;
-import com.PuckYeah.dialog.LogoutDialogFragment;
-import com.PuckYeah.responseModel.Tokens;
-import com.PuckYeah.responseModel.Tokens.Token;
-import com.hockeyAndroid.hockeybuildmanager.R;
+import com.PuckYeah.model.Token;
+import com.PuckYeah.response.Tokens;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
-@SuppressWarnings("unused")
 public class LoginActivity extends Activity {
 	
-	/**
-	 * The default email to populate the email field with.
-	 */
-	public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
+	public static final String EXTRA_EMAIL = "Email";
 
-	/**
-	 * Keep track of the login task to ensure we can cancel it if requested.
-	 */
 	private UserLoginTask mAuthTask = null;
 
 	// Values for email and password at the time of the login attempt.
@@ -117,11 +123,6 @@ public class LoginActivity extends Activity {
 		return super.onOptionsItemSelected(selectedItem);
 	}
 
-	/**
-	 * Attempts to sign in or register the account specified by the login form.
-	 * If there are form errors (invalid email, missing fields, etc.), the
-	 * errors are presented and no actual login attempt is made.
-	 */
 	public void attemptLogin() {
 		if (mAuthTask != null) {
 			return;
@@ -174,14 +175,8 @@ public class LoginActivity extends Activity {
 		}
 	}
 
-	/**
-	 * Shows the progress UI and hides the login form.
-	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 	private void showProgress(final boolean show) {
-		// On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-		// for very easy animations. If available, use these APIs to fade-in
-		// the progress spinner.
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
 			int shortAnimTime = getResources().getInteger(
 					android.R.integer.config_shortAnimTime);
@@ -223,7 +218,7 @@ public class LoginActivity extends Activity {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			try {
-				String url = "https://rink.hockeyapp.net/api/2/auth_tokens";
+				String url = Constants.LOGIN_URL;
 				Tokens tokens = (Tokens) ApiManager.doLoginRequest(getApplicationContext(), HttpMethod.GET, url, Tokens.class, mEmail, mPassword, Constants.AUTH_GET);
 				if (tokens.getTokens().size()>0) {
 					for (Token token : tokens.getTokens()) {
@@ -231,13 +226,13 @@ public class LoginActivity extends Activity {
 						sharedPrefs.edit().putString(Constants.APP_KEY, token.getToken()).commit();
 						return true;
  					}
-				}
-				
-				tokens = (Tokens) ApiManager.doLoginRequest(getApplicationContext(), HttpMethod.POST, url, Tokens.class, mEmail, mPassword, Constants.AUTH_POST);
-				for (Token token : tokens.getTokens()) {
-					SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
-					sharedPrefs.edit().putString(Constants.APP_KEY, token.getToken()).commit();
-					return true;
+				} else {
+					tokens = (Tokens) ApiManager.doLoginRequest(getApplicationContext(), HttpMethod.POST, url, Tokens.class, mEmail, mPassword, Constants.AUTH_POST);
+					for (Token token : tokens.getTokens()) {
+						SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+						sharedPrefs.edit().putString(Constants.APP_KEY, token.getToken()).commit();
+						return true;
+					}
 				}
 				
 			} catch (Exception e) {

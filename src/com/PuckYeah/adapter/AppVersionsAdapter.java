@@ -16,7 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.PuckYeah.VersionDetailActivity;
-import com.PuckYeah.responseModel.AppVersions.AppVersion;
+import com.PuckYeah.model.AppVersion;
 
 public class AppVersionsAdapter extends ArrayAdapter<AppVersion> {
 
@@ -61,6 +61,7 @@ public class AppVersionsAdapter extends ArrayAdapter<AppVersion> {
 					i.putExtra("config_url", item.getConfigUrl());
 					i.putExtra("download_url", item.getDownloadUrl());
 					i.putExtra("notes", item.getNotes());
+//					i.putExtra("", item.get)
 					
 					mContext.startActivity(i);
 				}

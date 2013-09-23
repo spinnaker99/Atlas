@@ -1,3 +1,19 @@
+/*
+   Copyright 2013 Vijay Penemetsa
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
 package com.PuckYeah;
 
 import android.annotation.SuppressLint;
@@ -10,8 +26,6 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 
 import com.PuckYeah.api.Constants;
-import com.PuckYeah.util.SystemUiHider;
-import com.hockeyAndroid.hockeybuildmanager.R;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -22,7 +36,7 @@ import com.hockeyAndroid.hockeybuildmanager.R;
 @SuppressLint("HandlerLeak")
 public class SplashActivity extends Activity {
 	
-	private static final long DELAY_TIME = 4000;
+	private static final long DELAY_TIME = 2500;
 	
 	private MainHandler mMainHandler = new MainHandler();
 	private LoginHandler mLoginHandler = new LoginHandler();
@@ -47,24 +61,23 @@ public class SplashActivity extends Activity {
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-		
 	}
 	
 	private class MainHandler extends Handler {
-			@Override
-			public void handleMessage(Message msg) {
-				Intent i = new Intent(SplashActivity.this, MainActivity.class);
-				startActivity(i);
-				finish();
-			}
+		@Override
+		public void handleMessage(Message msg) {
+			Intent i = new Intent(SplashActivity.this, MainActivity.class);
+			startActivity(i);
+			finish();
+		}
 	}
 	
 	private class LoginHandler extends Handler {
-			@Override
-			public void handleMessage(Message msg) {
-				Intent i = new Intent(SplashActivity.this, LoginActivity.class);
-				startActivity(i);
-				finish();
-			}
+		@Override
+		public void handleMessage(Message msg) {
+			Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+			startActivity(i);
+			finish();
+		}
 	}
 }
